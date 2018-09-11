@@ -31,7 +31,7 @@
     "redux-promise": "^0.5.1",
     "redux-recycle": "^1.2.0",
     "redux-thunk": "^2.1.0",
-    "simpl": "git+https://7e1b08465a2c5d2ba410cad5559f02751278ba79@github.com/simplworld/simpl-react.git#v0.7.0",
+    "simpl": "git+https://github.com/simplworld/simpl-react.git#v0.7.0",
     "superagent": "1.8.1",
     "superagent-promise": "^1.1.0",
     "validator": "^6.1.0",

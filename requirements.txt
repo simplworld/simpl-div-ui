@@ -4,7 +4,7 @@ djangorestframework==3.6.4
 django-bootstrap3==8.2.1
 
 # Simpl Modules
-https://7e1b08465a2c5d2ba410cad5559f02751278ba79@github.com/simplworld/simpl-client/archive/v0.7.0.zip
+https://github.com/simplworld/simpl-client/archive/v0.7.0.zip
 
 django-webpack-loader==0.6.0
 
