@@ -40,7 +40,7 @@ const RootContainer = connect(
   null
 )(Root);
 
-const runs = RUNS.map((id) => `model:model.run.${id}`);;
+const runs = RUNS.map((id) => `model:model.run.${id}`);
 const runusers = RUNUSERS.map((id) => `model:model.runuser.${id}`);
 const worlds = WORLDS.map((id) => `model:model.world.${id}`);
 const topics = (LEADER) ? runs : runusers.concat(worlds);
