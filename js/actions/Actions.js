@@ -1,6 +1,6 @@
 import {createAction} from 'redux-actions';
 
-import AutobahnReact from 'simpl/lib/autobahn';
+import AutobahnReact from 'simpl-react/lib/autobahn';
 
 // actions used to bracket processing a request (e.g. advancing the phase)
 export const startProcessing = createAction('START_PROCESSING');

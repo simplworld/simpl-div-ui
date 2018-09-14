@@ -1,5 +1,5 @@
 /* eslint global-require: "off" */
-import {finalCreateStoreFactory} from 'simpl/lib/stores';
+import {finalCreateStoreFactory} from 'simpl-react/lib/stores';
 
 import rootReducer from '../reducers/combined/appReducers';
 

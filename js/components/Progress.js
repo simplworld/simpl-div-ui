@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import {Alert} from 'react-bootstrap'
 
-import {CONNECTION_STATUS} from 'simpl/lib/constants'
+import {CONNECTION_STATUS} from 'simpl-react/lib/constants'
 
 
 function Connecting(props) {

@@ -8,7 +8,7 @@ var BundleTracker = require('webpack-bundle-tracker');
 
 var entry_points = {
   common: [
-    'babel-polyfill', 'react', 'react-dom', 'simpl', 'superagent', 'superagent-promise',
+    'babel-polyfill', 'react', 'react-dom', 'simpl-react', 'superagent', 'superagent-promise',
     'react-cookie', 'react-redux', 'redux',
     'redux-recycle', 'history', 'ws',
   ],
