@@ -1,27 +1,27 @@
-import {createReducer} from 'redux-create-reducer';
-import recycleState from 'redux-recycle';
+import { handleActions } from 'redux-actions'
+import recycleState from 'redux-recycle'
+import { recyleStateAction } from 'simpl-react/lib/actions/state'
 
-import {recyleStateAction} from 'simpl-react/lib/actions/state';
+import { startProcessing, completeProcessing } from '../actions/CommonActions'
 
-import {
-  startProcessing,
-  completeProcessing
-} from '../actions/Actions';
+const initialState = { inProcess: false }
 
-const initial = {inProcess: false};
+const processing = handleActions(
+  {
+    [startProcessing](state) {
+      return Object.assign({}, state, {
+        inProcess: true,
+      })
+    },
 
-const processing = recycleState(createReducer(initial, {
-  [startProcessing](state, action) {
-    return Object.assign({}, state, {
-      inProcess: true
-    });
+    [completeProcessing](state) {
+      // console.log("setting inProcess: false");
+      return Object.assign({}, state, {
+        inProcess: false,
+      })
+    },
   },
-  [completeProcessing](state, action) {
-    // console.log("setting inProcess: false");
-    return Object.assign({}, state, {
-      inProcess: false
-    });
-  },
-}), `${recyleStateAction}`);
+  initialState
+)
 
-export default processing
+export default recycleState(processing, `${recyleStateAction}`)

@@ -1,10 +1,10 @@
-Django==1.11.11
-django-username-email==2.1.3
+Django>=1.11.15,<2.0
+django-username-email<2.2
+django-environ==0.4.4
 djangorestframework==3.6.4
-django-bootstrap3==8.2.1
 
 # Simpl Modules
-simpl-client==0.7.3
+simpl-client==0.7.4
 
 django-webpack-loader==0.6.0
 
