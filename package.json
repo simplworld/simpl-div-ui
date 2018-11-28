@@ -62,9 +62,6 @@
     "node": ">=0.8.0"
   },
   "scripts": {
-    "compile": "npm run compileCSS && npm run compileJS",
-    "compileCSS": "gulp sass",
-    "compileJS": "if [ \"$NODE_ENV\" = \"production\" ]; then\n\twebpack -p\nelse\n\twebpack -d\nfi",
     "start": "gulp",
     "test": "jest",
     "test:watch": "npm test -- --watch"
