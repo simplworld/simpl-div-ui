@@ -1,30 +1,29 @@
-import { handleActions } from 'redux-actions'
-import recycleState from 'redux-recycle'
+import {createReducer} from 'redux-create-reducer';
+import recycleState from 'redux-recycle';
 
-import { recyleStateAction } from 'simpl-react/lib/actions/state'
+import {recyleStateAction} from 'simpl-react/lib/actions/state';
 
-import { setStatus, clearStatus } from '../actions/CommonActions'
+import {
+  setStatus,
+  clearStatus
+} from '../actions/Actions';
 
-const initial = { message: null }
+const initial = {message: null};
 
-const status = handleActions(
-  {
-    [setStatus](state, action) {
-      const message = action.payload
-      console.log('setting status.message: ', message)
-      return Object.assign({}, state, {
-        message,
-      })
-    },
-
-    [clearStatus](state) {
-      console.log('clearing status.message')
-      return Object.assign({}, state, {
-        message: null,
-      })
-    },
+const status = recycleState(createReducer(initial, {
+  [setStatus](state, action) {
+    const message = action.payload;
+    console.log("setting status.message: ", message);
+    return Object.assign({}, state, {
+      message: message
+    });
   },
-  initial
-)
+  [clearStatus](state) {
+    console.log("clearing status.message");
+    return Object.assign({}, state, {
+      message: null
+    });
+  },
+}), `${recyleStateAction}`);
 
-export default recycleState(status, `${recyleStateAction}`)
+export default status;
