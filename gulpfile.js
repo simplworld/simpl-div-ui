@@ -1,20 +1,21 @@
 var gulp = require('gulp');
-var watch = require('gulp-watch');
-var livereload = require('gulp-livereload');
-var webpack = require('webpack-stream');
-
-/* Watch Files For Changes */
-gulp.task('watch', function () {
-  livereload.listen();
-  gulp.watch('js/**/*.js', ['webpack']);
-});
+var webpackStream = require('webpack-stream');
+var webpackConfig = require('./webpack.config.js');
 
 /* Webpack */
-gulp.task('webpack', function (callback) {
-  return gulp.src('js/*.js')
-    .pipe(webpack(require('./webpack.config.js')))
-    .pipe(gulp.dest('staticfiles/webpack_bundles/'))
-    .pipe(livereload());
-});
+gulp.task('webpack', function() {
+  return gulp
+    .src('js/*.js')
+    .pipe(webpackStream(webpackConfig))
+    .pipe(gulp.dest('staticfiles/webpack_bundles/'));
+})
 
-gulp.task('default', ['watch', 'webpack']);
+gulp.task('build', gulp.parallel('webpack'));
+
+/* Watch Files For Changes */
+gulp.task('watch', function() {
+  gulp.watch('js/**/*.js', gulp.series('webpack'));
+})
+
+gulp.task('default', gulp.series('build', 'watch'));
+

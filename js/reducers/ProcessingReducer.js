@@ -24,4 +24,4 @@ const processing = recycleState(createReducer(initial, {
   },
 }), `${recyleStateAction}`);
 
-export default processing
+export default processing;
