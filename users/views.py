@@ -14,9 +14,8 @@ class CallbackAPIView(views.APIView):
 
     @coro
     async def _get_user_from_simpl(self, email):
-        async with simpl_client as api_session:
-            user = await api_session.users.get(email=email)
-            return payload_to_attrs(user.payload)
+        user = await simpl_client.users.get(email=email)
+        return payload_to_attrs(user.payload)
 
     def create_user_from_runuser(self, payload):
         User = get_user_model()
