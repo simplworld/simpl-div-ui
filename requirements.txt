@@ -6,7 +6,7 @@ djangorestframework==3.9.4
 django-bootstrap3==8.2.1
 
 # Simpl Modules
-simpl-client==0.7.5
+simpl-client==0.8.1
 
 django-webpack-loader==0.6.0
 
