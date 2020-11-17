@@ -17,7 +17,7 @@ class LeaderRunDebrief extends React.Component {
     return (
       <div>
         <div>
-          <h1>Run: {name}</h1>
+          <h1>Debrief Run: {name}</h1>
         </div>
         <div>
           <table>
@@ -35,7 +35,7 @@ class LeaderRunDebrief extends React.Component {
           </table>
         </div>
         <br/>
-        <a href="/" className="btn btn-success btn-lg">Home</a>
+        <a href="/" className="btn btn-success btn-lg">Return to Run Dashboard</a>
         <br/>
         <a href="/logout/" className="btn btn-success btn-lg">Logout</a>
       </div>

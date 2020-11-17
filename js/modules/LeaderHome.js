@@ -15,7 +15,7 @@ class LeaderHome extends React.Component {
     return (
       <div>
         <div>
-          <h1>Hello {name}</h1>
+          <h1>{name} Run Dashboard</h1>
         </div>
         <div>
           <table>

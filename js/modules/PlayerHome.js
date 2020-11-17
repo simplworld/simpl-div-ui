@@ -10,7 +10,7 @@ import StatusNotificationContainer from '../containers/StatusNotificationContain
 class PlayerHome extends React.Component {
   render() {
     const quotient = (this.props.result) ? this.props.result.data.quotient : '';
-    const other_operand = (this.props.other_decision) ? this.props.other_decision.data.operand : '';
+    const other_operand = (this.props.other_decision) ? this.props.other_decision.data.operand : 'TBD';
     const operand = (this.props.decision) ? this.props.decision.data.operand : 0;
     let play = '';
     if (this.props.canPlay) {
