@@ -16,7 +16,7 @@
     "redux-create-reducer": "^1.1.1",
     "redux-form": "^6.8.0",
     "redux-recycle": "^1.2.0",
-    "simpl-react": "git+https://github.com/simplworld/simpl-react.git",
+    "simpl-react": "git+https://github.com/simplworld/simpl-react.git#load-run-data-on-demand",
     "validator": "^6.1.0",
     "webpack": "^3.11.0",
     "webpack-bundle-tracker": "^0.4.2-beta",
