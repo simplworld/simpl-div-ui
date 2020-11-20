@@ -5,11 +5,35 @@ import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
 import {Alert} from 'react-bootstrap';
 
+import { isEmpty, isNil } from 'lodash';
+
+import {SimplActions} from 'simpl-react/lib/actions';
+
 import WorldRowContainer from '../containers/WorldRowContainer';
 
 
 class LeaderRunDebrief extends React.Component {
+
+  componentDidMount() {
+    // load run's worlds if not already loaded
+    const {run, loadedRun, loadRun} = this.props;
+    console.log("componentDidMount: loadedRun:", loadedRun);
+    if (!isNil(run)) {
+      if (isEmpty(loadedRun) || run.pk != loadedRun.pk) {
+        console.log("componentDidMount: dispatch loadRun");
+        loadRun(run);
+      }
+    }
+  }
+
+  componentWillUnmount() {
+    console.log("componentWillUnmount")
+  }
+
   render() {
+    const loadedRun = this.props.loadedRun;
+    console.log("render: loadedRun: ", loadedRun);
+
     const name = this.props.run.name;
     const worldRows = this.props.worlds.map(
       (w) => <WorldRowContainer key={w.id} world={w}/>
@@ -46,7 +70,9 @@ class LeaderRunDebrief extends React.Component {
 LeaderRunDebrief.propTypes = {
   run: PropTypes.object.isRequired,
   worlds: PropTypes.array.isRequired,
+  loadedRun: PropTypes.object,
 
+  loadRun: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state, ownProps) {
@@ -59,15 +85,24 @@ function mapStateToProps(state, ownProps) {
   );
   const worlds = _.sortBy(unsortedWorlds, (s) => s.id);   // worlds are created in order
 
+  const loadedRun = state.simpl.loaded_run;
+
   return {
     run,
     worlds,
+    loadedRun,
   };
 }
 
+const mapDispatchToProps = dispatch => {
+  return {
+    loadRun: (run) => dispatch(SimplActions.setLoadedRun(run)),
+  };
+};
+
 const module = connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(LeaderRunDebrief);
 
 export default withRouter(module);
