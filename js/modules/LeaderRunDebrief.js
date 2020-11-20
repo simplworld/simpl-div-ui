@@ -96,7 +96,13 @@ function mapStateToProps(state, ownProps) {
 
 const mapDispatchToProps = dispatch => {
   return {
-    loadRun: (run) => dispatch(SimplActions.setLoadedRun(run)),
+    loadRun(run) {
+      console.log(`loadRun::`);
+      const runId = run.id;
+      const topic = `model:model.run.${runId}`;
+      dispatch(SimplActions.getDataTree(topic));
+      dispatch(SimplActions.setLoadedRun(run));
+    },
   };
 };
 
