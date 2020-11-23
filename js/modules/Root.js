@@ -16,7 +16,7 @@ import PlayerHome from './PlayerHome';
 const Home = (LEADER) ? LeaderHome : PlayerHome;
 
 class Root extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     const userId = parseInt(AUTHID, 10);
   }
 
