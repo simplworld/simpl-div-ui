@@ -8,6 +8,7 @@ import {Alert} from 'react-bootstrap';
 import { isEmpty, isNil } from 'lodash';
 
 import {SimplActions} from 'simpl-react/lib/actions';
+// import {simpl} from 'simpl-react/lib/decorators/simpl';
 
 import WorldRowContainer from '../containers/WorldRowContainer';
 
@@ -92,7 +93,7 @@ function mapStateToProps(state, ownProps) {
 const mapDispatchToProps = dispatch => {
   return {
     loadRunData(run, loadedRun) {
-      console.log(`mapDispatchToProps.loadRun:`);
+      console.log(`mapDispatchToProps.loadRunData:`);
       if (!isNil(run)) {
         if (!isEmpty(loadedRun) && run.pk != loadedRun.pk) {
           // unload currently loaded world data
@@ -109,6 +110,7 @@ const mapDispatchToProps = dispatch => {
           const topic = `model:model.run.${runId}`;
           dispatch(SimplActions.getDataTree(topic));
           dispatch(SimplActions.setLoadedRun(runId));
+          // simpl.loadRunData(run);
         }
       }
     },
