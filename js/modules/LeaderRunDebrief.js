@@ -2,13 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import {connect} from 'react-redux';
-import {withRouter} from 'react-router';
-import {Alert} from 'react-bootstrap';
+import {withRouter, Link} from 'react-router';
 
 import { isEmpty, isNil } from 'lodash';
 
 import {SimplActions} from 'simpl-react/lib/actions';
-// import {simpl} from 'simpl-react/lib/decorators/simpl';
+
 
 import WorldRowContainer from '../containers/WorldRowContainer';
 
@@ -17,9 +16,9 @@ class LeaderRunDebrief extends React.Component {
 
   componentDidMount() {
     // load run's worlds if not already loaded
-    const {run, loadedRun, loadedWorlds, loadRunData} = this.props;
+    const {run, loadedRun, loadRunData} = this.props;
     console.log("componentDidMount: loadedRun:", loadedRun);
-    loadRunData(run, loadedRun, loadedWorlds);
+    loadRunData(run, loadedRun);
   }
 
   componentWillUnmount() {
@@ -27,13 +26,11 @@ class LeaderRunDebrief extends React.Component {
   }
 
   render() {
-    const loadedRun = this.props.loadedRun;
-    console.log("render: loadedRun: ", loadedRun);
-
     const name = this.props.run.name;
     const worldRows = this.props.worlds.map(
       (w) => <WorldRowContainer key={w.id} world={w}/>
     );
+
     return (
       <div>
         <div>
@@ -55,7 +52,7 @@ class LeaderRunDebrief extends React.Component {
           </table>
         </div>
         <br/>
-        <a href="/" className="btn btn-success btn-lg">Return to Run Dashboard</a>
+        <Link to='/' id={`home`}>Return to Run Dashboard</Link>
         <br/>
         <a href="/logout/" className="btn btn-success btn-lg">Logout</a>
       </div>
@@ -67,7 +64,6 @@ LeaderRunDebrief.propTypes = {
   run: PropTypes.object.isRequired,
   worlds: PropTypes.array.isRequired,
   loadedRun: PropTypes.object,
-  loadedWorlds: PropTypes.array,
 
   loadRunData: PropTypes.func.isRequired,
 };
@@ -85,30 +81,20 @@ function mapStateToProps(state, ownProps) {
   return {
     run,
     worlds,
-    loadedRun: state.simpl.loaded_run,
-    loadedWorlds: state.simpl.world
+    loadedRun: state.simpl.loaded_run
   };
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    loadRunData(run, loadedRun, loadedWorlds) {
+    loadRunData(run, loadedRun) {
       console.log(`mapDispatchToProps.loadRunData:`);
       if (!isNil(run)) {
-        if (!isEmpty(loadedRun) && run.pk != loadedRun.pk) {
-          // unload currently loaded world data
-          console.log('unloading loadedWorlds:', loadedWorlds);
-          loadedWorlds.forEach((world) => {
-            dispatch(removeChild(world));
-          });
-        }
-        if (isEmpty(loadedRun) || run.pk != loadedRun.pk) {
+        if (isEmpty(loadedRun) || run.id != loadedRun.id) {
           // load run's world data
-          const runId = run.id;
-          const topic = `model:model.run.${runId}`;
+          const topic = `model:model.run.${run.id}`;
           dispatch(SimplActions.getDataTree(topic));
-          dispatch(SimplActions.setLoadedRun(runId));
-          // simpl.loadRunData(run);
+          dispatch(SimplActions.setLoadedRun(run));
         }
       }
     },
