@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 class WorldRow extends React.Component {
   render() {
-    console.log("WorldRow: props=", this.props);
+    // console.log("WorldRow: props=", this.props);
     return (
       <tr>
         <td>{this.props.world.name}</td>

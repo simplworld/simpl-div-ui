@@ -40,7 +40,7 @@ function mapStateToProps(state, ownProps) {
     quotient = result.data.quotient.toString();
   }
 
-  console.log('WorldRowContainer: dividend=', dividend, ', divisor=', divisor, ', quotient=', quotient);
+  // console.log('WorldRowContainer: dividend=', dividend, ', divisor=', divisor, ', quotient=', quotient);
   return {
     world,
     dividend,
