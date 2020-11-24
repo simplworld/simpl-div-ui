@@ -4,15 +4,13 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
 import RunRowContainer from '../containers/RunRowContainer'
-import {isEmpty} from "lodash";
 import {SimplActions} from "simpl-react/lib/actions";
 
 class LeaderHome extends React.Component {
 
   componentDidMount() {
     // unload any loaded worlds
-    const {loadedRun, unloadRunData} = this.props;
-    unloadRunData(loadedRun);
+    this.props.unloadRunData();
   }
 
   render() {
@@ -48,7 +46,6 @@ class LeaderHome extends React.Component {
 LeaderHome.propTypes = {
   runuser: PropTypes.object.isRequired,
   runs: PropTypes.array,
-  loadedRun: PropTypes.object,
 
   unloadRunData: PropTypes.func.isRequired,
 };
@@ -57,17 +54,14 @@ function mapStateToProps(state) {
   return {
     runuser: state.simpl.current_runuser,
     runs: state.simpl.run,
-    loadedRun: state.simpl.loaded_run
   };
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    unloadRunData(loadedRun) {
-      console.log(`mapDispatchToProps.unloadRunData:`);
-      if (!isEmpty(loadedRun)) {
-        dispatch(SimplActions.unloadWorlds(loadedRun)); // 4
-      }
+    unloadRunData() {
+      // console.log(`mapDispatchToProps.unloadRunData:`);
+      dispatch(SimplActions.unloadWorlds());
     }
   }
 };
