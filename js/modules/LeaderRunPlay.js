@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import {connect} from 'react-redux';
-import {withRouter} from 'react-router';
+import {withRouter, Link} from 'react-router';
 
 import AdvancePhaseContainer from '../containers/AdvancePhaseContainer';
 
@@ -20,7 +20,7 @@ class LeaderRunPlay extends React.Component {
             <AdvancePhaseContainer run={this.props.run}/>
         </div>
         <br/>
-        <a href="/" className="btn btn-success btn-lg">Return to Run Dashboard</a>
+        <Link to='/' id={`home`}>Return to Run Dashboard</Link>
         <br/>
         <a href="/logout/" className="btn btn-success btn-lg">Logout</a>
       </div>
