@@ -17,9 +17,9 @@ class LeaderRunDebrief extends React.Component {
 
   componentDidMount() {
     // load run's worlds if not already loaded
-    const {run, loadedRun, loadRunData} = this.props;
+    const {run, loadedRun, loadedWorlds, loadRunData} = this.props;
     console.log("componentDidMount: loadedRun:", loadedRun);
-    loadRunData(run, loadedRun);
+    loadRunData(run, loadedRun, loadedWorlds);
   }
 
   componentWillUnmount() {
@@ -67,6 +67,7 @@ LeaderRunDebrief.propTypes = {
   run: PropTypes.object.isRequired,
   worlds: PropTypes.array.isRequired,
   loadedRun: PropTypes.object,
+  loadedWorlds: PropTypes.array,
 
   loadRunData: PropTypes.func.isRequired,
 };
@@ -81,25 +82,22 @@ function mapStateToProps(state, ownProps) {
   );
   const worlds = _.sortBy(unsortedWorlds, (s) => s.id);   // worlds are created in order
 
-  const loadedRun = state.simpl.loaded_run;
-
   return {
     run,
     worlds,
-    loadedRun,
+    loadedRun: state.simpl.loaded_run,
+    loadedWorlds: state.simpl.world
   };
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    loadRunData(run, loadedRun) {
+    loadRunData(run, loadedRun, loadedWorlds) {
       console.log(`mapDispatchToProps.loadRunData:`);
       if (!isNil(run)) {
         if (!isEmpty(loadedRun) && run.pk != loadedRun.pk) {
           // unload currently loaded world data
-          const loadedWorlds = state.simpl.world.filter(
-            (w) => loadedRun.id === w.run
-          );
+          console.log('unloading loadedWorlds:', loadedWorlds);
           loadedWorlds.forEach((world) => {
             dispatch(removeChild(world));
           });
