@@ -16,9 +16,9 @@ class LeaderRunDebrief extends React.Component {
 
   componentDidMount() {
     // load run's worlds if not already loaded
-    const {run, loadedRun, loadRunData} = this.props;
-    // console.log("componentDidMount: loadedRun:", loadedRun);
-    loadRunData(run, loadedRun);
+    const {run, loadedRunId, loadRunData} = this.props;
+    // console.log("componentDidMount: loadedRunId:", loadedRunId);
+    loadRunData(run, loadedRunId);
   }
 
   render() {
@@ -59,7 +59,7 @@ class LeaderRunDebrief extends React.Component {
 LeaderRunDebrief.propTypes = {
   run: PropTypes.object.isRequired,
   worlds: PropTypes.array.isRequired,
-  loadedRun: PropTypes.object,
+  loadedRunId: PropTypes.number,
 
   loadRunData: PropTypes.func.isRequired,
 };
@@ -77,20 +77,17 @@ function mapStateToProps(state, ownProps) {
   return {
     run,
     worlds,
-    loadedRun: state.simpl.loaded_run
+    loadedRunId: state.simpl.loaded_run
   };
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    loadRunData(run, loadedRun) {
+    loadRunData(run, loadedRunId) {
       // console.log(`mapDispatchToProps.loadRunData:`);
       if (!isNil(run)) {
-        if (isEmpty(loadedRun) || run.id != loadedRun.id) {
-          // load run's world data
-          const topic = `model:model.run.${run.id}`;
-          dispatch(SimplActions.getDataTree(topic));
-          dispatch(SimplActions.setLoadedRun(run));
+        if (run.id !== loadedRunId) {
+          dispatch(SimplActions.loadWorlds(run.id));
         }
       }
     },
