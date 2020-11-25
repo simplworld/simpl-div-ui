@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import {connect} from 'react-redux';
-import {withRouter} from 'react-router';
-import {Alert} from 'react-bootstrap';
+import {withRouter, Link} from 'react-router';
 
 import WorldRowContainer from '../containers/WorldRowContainer';
 
@@ -35,7 +34,7 @@ class LeaderRunDebrief extends React.Component {
           </table>
         </div>
         <br/>
-        <a href="/" className="btn btn-success btn-lg">Home</a>
+        <Link to='/' id={`home`}>Home</Link>
         <br/>
         <a href="/logout/" className="btn btn-success btn-lg">Logout</a>
       </div>
