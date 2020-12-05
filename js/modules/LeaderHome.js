@@ -10,7 +10,7 @@ class LeaderHome extends React.Component {
 
   componentDidMount() {
     // unload any loaded worlds
-    this.props.unloadRunData();
+    this.props.unloadRunDataAction();
   }
 
   render() {
@@ -47,7 +47,7 @@ LeaderHome.propTypes = {
   runuser: PropTypes.object.isRequired,
   runs: PropTypes.array,
 
-  unloadRunData: PropTypes.func.isRequired,
+  unloadRunDataAction: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
@@ -59,9 +59,9 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = dispatch => {
   return {
-    unloadRunData() {
-      // console.log(`mapDispatchToProps.unloadRunData:`);
-      dispatch(SimplActions.unloadWorlds());
+    unloadRunDataAction() {
+      // console.log(`mapDispatchToProps.unloadRunDataAction:`);
+      dispatch(SimplActions.unloadRunData());
     }
   }
 };

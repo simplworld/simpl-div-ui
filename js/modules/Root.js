@@ -56,5 +56,5 @@ export default simpl({
   root_topic: ROOT_TOPIC,
   topics: () => topics,
   loadAllScenarios: false,
-  loadRunWorldsOnDemand: LEADER,
+  loadRunDataOnDemand: LEADER,
 })(RootContainer);

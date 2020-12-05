@@ -16,9 +16,9 @@ class LeaderRunDebrief extends React.Component {
 
   componentDidMount() {
     // load run's worlds if not already loaded
-    const {run, loadedRunId, loadRunData} = this.props;
+    const {run, loadedRunId, loadRunDataAction} = this.props;
     // console.log("componentDidMount: loadedRunId:", loadedRunId);
-    loadRunData(run, loadedRunId);
+    loadRunDataAction(run, loadedRunId);
   }
 
   render() {
@@ -61,7 +61,7 @@ LeaderRunDebrief.propTypes = {
   worlds: PropTypes.array.isRequired,
   loadedRunId: PropTypes.number,
 
-  loadRunData: PropTypes.func.isRequired,
+  loadRunDataAction: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state, ownProps) {
@@ -83,11 +83,11 @@ function mapStateToProps(state, ownProps) {
 
 const mapDispatchToProps = dispatch => {
   return {
-    loadRunData(run, loadedRunId) {
+    loadRunDataAction(run, loadedRunId) {
       // console.log(`mapDispatchToProps.loadRunData:`);
       if (!isNil(run)) {
         if (run.id !== loadedRunId) {
-          dispatch(SimplActions.loadWorlds(run.id));
+          dispatch(SimplActions.loadRunData(run.id));
         }
       }
     },
