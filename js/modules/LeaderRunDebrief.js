@@ -87,7 +87,7 @@ const mapDispatchToProps = dispatch => {
       // console.log(`mapDispatchToProps.loadRunData:`);
       if (!isNil(run)) {
         if (run.id !== loadedRunId) {
-          dispatch(SimplActions.loadRunData(run.id));
+          dispatch(SimplActions.loadRunData(run.id, false));
         }
       }
     },
