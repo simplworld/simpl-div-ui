@@ -87,7 +87,8 @@ const mapDispatchToProps = dispatch => {
       // console.log(`mapDispatchToProps.loadRunData:`);
       if (!isNil(run)) {
         if (run.id !== loadedRunId) {
-          dispatch(SimplActions.loadRunData(run.id, false));
+          // dispatch(SimplActions.loadRunData(run.id, true)); // load player scenarios
+          dispatch(SimplActions.loadRunData(run.id)); // do not load player scenarios
         }
       }
     },
