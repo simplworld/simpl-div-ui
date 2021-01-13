@@ -66,7 +66,7 @@ function mapStateToProps(state) {
     (p) => p.name === 'Play'
   )
   const canPlay = playPhase.id === currentPhase.id;
-  console.log("PlayerHome: currentPhase=", currentPhase, ", playPhase.id=", playPhase.id, ", canPlay=", canPlay);
+  // console.log("PlayerHome: currentPhase=", currentPhase, ", playPhase.id=", playPhase.id, ", canPlay=", canPlay);
 
   const other_role = state.simpl.role.find((r) => r.id !== runuser.role);
   const other_role_name = other_role.name;

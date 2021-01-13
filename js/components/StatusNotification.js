@@ -14,7 +14,7 @@ class StatusNotification extends React.Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentHasReceivedProps(nextProps) {
     return this.setState((prevState, props) => ({
       show_modal: props.message !== null,
     }));

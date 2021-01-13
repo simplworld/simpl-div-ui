@@ -29,7 +29,7 @@ class DecisionForm extends React.Component {
               type="number"
               name="operand"
               id="operand"
-              required="true"
+              required={true}
               step="any"
             />
           </div>
