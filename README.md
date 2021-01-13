@@ -1,18 +1,40 @@
 #  simpl-div-ui - example multi-player simulation frontend service.
 
-## Python Setup (assumes Python >= 3.6, simpl-games-api and simpl-div-model servers running)
+## Python Setup (assumes Python 3.6, simpl-games-api and simpl-div-model servers running)
+
+## Install simpl-div-ui
 
 ```shell
-$ git clone git@github.com:simplworld/simpl-div-ui.git
+$ git clone https://github.com/simplworld/simpl-div-ui.git
 $ cd simpl-div-ui
+```
+
+## Local Docker Setup
+
+The `simpl-games-api` and `simpl-div-model` containers need to be running before starting `simpl-div-ui`.
+
+You also need to have a `is_staff=True` user in the simpl-games-api database that
+corresponds to the `SIMPL_GAMES_AUTH` setting used here.
+
+After you clone the repo, run:
+
+```bash
+$ docker-compose up
+```
+
+this will create the Docker image and run it. 
+
+## Local Setup Without Docker
+
+### Install Python dependencies and create a SQLite database
+```shell
 $ mkvirtualenv simpl-div-ui
 $ add2virtualenv .
-
 $ pip install -r requirements.txt
 $ ./manage.py migrate
 ```
 
-## Run front end
+### Run front end
 
 ```shell
 $ ./manage.py runserver 0.0.0.0:8000
@@ -27,7 +49,7 @@ var AUTOBAHN_DEBUG = true;
 Which will turn on verbose debugging of the Autobahn/Websockets to help debug interactions between the browser and model service backend.
 If you do this, do NOT commit this change.
 
-Update node_modules and run Gulp to compile JS
+In a separate terminal, update node_modules and run Gulp to compile JS
 
 ```shell
 $ cd to simpl-div-ui directory
@@ -35,7 +57,7 @@ $ npm install
 $ npm start
 ```
 
-## Run javascript unit tests (run outside Vagrant)
+## Run javascript unit tests
 
 We use jest and enzyme for unit testing (see http://redux.js.org/docs/recipes/WritingTests.html)
 

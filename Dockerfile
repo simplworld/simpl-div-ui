@@ -1,48 +1,37 @@
-FROM python:3.6
+FROM gladiatr72/just-tini:latest as tini
 
-LABEL Description="Image for simpl-div-ui" Vendor="Wharton" Version="0.1.0"
+FROM revolutionsystems/python:3.6.9-wee-optimized-lto
 
 ENV PYTHONUNBUFFERED 1
 
-ENV DOCKERIZE_VERSION v0.2.0
+RUN mkdir /code
+RUN mkdir /code/staticfiles
+RUN mkdir /code/staticfiles/webpack_bundles
 
-RUN mkdir -p /root/.ssh \
-    && chmod 700 /root/.ssh \
-    && echo "Host *\n\tStrictHostKeyChecking no\n\n" > /root/.ssh/config
+WORKDIR /code
 
-ADD keys/wharton_ll /root/.ssh/
-RUN chmod 600 /root/.ssh/wharton_ll
-
-RUN apt-get update && apt-get install -y wget \
-    && wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
-    && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
-    && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
+COPY --from=tini /tini /tini
 
 RUN pip install --upgrade pip
 
-RUN mkdir /code
-WORKDIR /code
+ADD ./requirements.txt /code/
+RUN pip install -r /code/requirements.txt
+
+# Setup NodeJS
+RUN set -ex && apt-get update && apt-get -y install curl software-properties-common
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
+RUN apt-get -y install nodejs
+
+ADD ./package.json /code/
+RUN npm install
+
 ADD . /code/
 
 ENV PYTHONPATH /code:$PYTHONPATH
-
-RUN eval "$(ssh-agent -s)" \
-    && ssh-add /root/.ssh/wharton_ll \
-    && pip install -r /code/requirements.txt \
-    && pip install -r /code/requirements_dev.txt
-
-RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
-RUN apt-get install -y nodejs \
-    && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
-
-RUN eval "$(ssh-agent -s)" \
-    && ssh-add /root/.ssh/wharton_ll \
-    && npm install --progress=false \
-    && npm dedupe --progress=false \
-    && npm run compile --production \
-    && rm -rf node_modules
-
-ENV MODEL_SERVICE_WS ws://model:8080/ws
+ENV MODEL_SERVICE_WS ws://localhost:8080/ws
 
 EXPOSE 8000
-CMD python check_modelservice.py && gunicorn simpl_div_ui.wsgi -b 0.0.0.0:8000
+CMD /code/bootstrap.sh
+
+LABEL Description="Image for simpl-calc-ui" Vendor="Simpl" Version="0.0.1"
+
