@@ -33,5 +33,5 @@ ENV MODEL_SERVICE_WS ws://localhost:8080/ws
 EXPOSE 8000
 CMD /code/bootstrap.sh
 
-LABEL Description="Image for simpl-calc-ui" Vendor="Simpl" Version="0.0.1"
+LABEL Description="Image for simpl-calc-ui" Vendor="Simpl" Version="0.1.0"
 
