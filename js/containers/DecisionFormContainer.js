@@ -26,6 +26,9 @@ function mapDispatchToProps(dispatch, ownProps) {
           if (status !== 'ok') {
             console.log("DecisionFormContainer.submitDecision failed due to: ", status);
             dispatch(setStatus(status));
+          } else {
+            console.log("DecisionFormContainer.submitDecision succeeded");
+            dispatch(setStatus(''));
           }
         });
     }
