@@ -5,10 +5,9 @@ import {connect} from 'react-redux';
 
 import DecisionFormContainer from '../containers/DecisionFormContainer'
 
-import StatusNotificationContainer from '../containers/StatusNotificationContainer';
-
 class PlayerHome extends React.Component {
   render() {
+    const {message} = this.props;
     const quotient = (this.props.result) ? this.props.result.data.quotient : '';
     const other_operand = (this.props.other_decision) ? this.props.other_decision.data.operand : 'TBD';
     const operand = (this.props.decision) ? this.props.decision.data.operand : 0;
@@ -19,7 +18,7 @@ class PlayerHome extends React.Component {
           <br/>
           <p>You are in charge of submitting a valid {this.props.runuser.role_name}.</p>
           < DecisionFormContainer period={this.props.period} operand={operand}/>
-          <StatusNotificationContainer/>
+          <h4><span>{message}</span></h4>
         </div>
       );
     } else {
@@ -51,7 +50,12 @@ PlayerHome.propTypes = {
   decision: PropTypes.object,
   other_decision: PropTypes.object,
   result: PropTypes.object,
+  message: PropTypes.string,
 };
+
+PlayerHome.defaultProps ={
+  message: '',
+}
 
 function mapStateToProps(state) {
   const runuser = state.simpl.current_runuser;
@@ -98,7 +102,8 @@ function mapStateToProps(state) {
     period,
     decision,
     other_decision,
-    result
+    result,
+    message: state.status.message,
   };
 }
 

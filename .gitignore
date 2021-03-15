@@ -98,3 +98,7 @@ webpack-stats.json
 
 # Webpack
 staticfiles/webpack_bundles
+
+# Docker
+/static/
+

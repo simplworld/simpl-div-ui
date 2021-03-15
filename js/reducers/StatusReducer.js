@@ -8,7 +8,7 @@ import {
   clearStatus
 } from '../actions/Actions';
 
-const initial = {message: null};
+const initial = {message: ''};
 
 const status = recycleState(createReducer(initial, {
   [setStatus](state, action) {
@@ -21,7 +21,7 @@ const status = recycleState(createReducer(initial, {
   [clearStatus](state) {
     console.log("clearing status.message");
     return Object.assign({}, state, {
-      message: null
+      message: ''
     });
   },
 }), `${recyleStateAction}`);
