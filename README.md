@@ -24,12 +24,25 @@ $ docker-compose up
 
 this will create the Docker image and run it. 
 
+If you recreate your Simpl database, you will also need to recreate your Docker image's SQLite database. 
+
+In a separate terminal, create a shell into the UI container by running:
+```shell
+$ docker-compose run --rm ui bash
+```
+
+Once you are in the container shell, run:
+```shell
+$ pip install -r requirements.txt
+$ rm db.sqlite3
+$ ./manage.py migrate
+```
+
 ## Local Setup Without Docker
 
 ### Install Python dependencies and create a SQLite database
 ```shell
 $ mkvirtualenv simpl-div-ui
-$ add2virtualenv .
 $ pip install -r requirements.txt
 $ ./manage.py migrate
 ```
