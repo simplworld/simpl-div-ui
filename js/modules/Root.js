@@ -55,6 +55,6 @@ export default simpl({
   progressComponent: Progress,
   root_topic: ROOT_TOPIC,
   topics: () => topics,
-  loadAllScenarios: LEADER === false,
+  loadAllScenarios: false,
   loadRunDataOnDemand: LEADER,
 })(RootContainer);
