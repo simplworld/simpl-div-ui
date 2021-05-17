@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import {connect} from 'react-redux';
 
-import RunRowContainer from '../containers/RunRowContainer'
+import RunRowContainer from '../containers/RunRowContainer';
 import {SimplActions} from "simpl-react/lib/actions";
 
 class LeaderHome extends React.Component {

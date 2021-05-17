@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {withRouter, Link} from 'react-router';
 
-import { isEmpty, isNil } from 'lodash';
+import {isNil} from 'lodash';
 
 import {SimplActions} from 'simpl-react/lib/actions';
 
