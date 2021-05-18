@@ -8,9 +8,7 @@ import {isNil} from 'lodash';
 
 import {SimplActions} from 'simpl-react/lib/actions';
 
-
 import WorldRowContainer from '../containers/WorldRowContainer';
-
 
 class LeaderRunDebrief extends React.Component {
 
@@ -77,7 +75,7 @@ function mapStateToProps(state, ownProps) {
   return {
     run,
     worlds,
-    loadedRunId: state.simpl.loaded_run
+    loadedRunId: state.simpl.loaded_run // non-null if run data has been loaded
   };
 }
 
