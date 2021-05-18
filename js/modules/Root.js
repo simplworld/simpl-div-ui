@@ -9,7 +9,6 @@ import {simpl} from 'simpl-react/lib/decorators/simpl';
 
 import Progress from '../components/Progress';
 
-import LeaderRunPlay from './LeaderRunPlay';
 import LeaderRunDebrief from './LeaderRunDebrief';
 import LeaderHome from './LeaderHome';
 import PlayerHome from './PlayerHome';
@@ -26,7 +25,6 @@ class Root extends React.Component {
       <Router history={browserHistory}>
         {/* player or leader home page route */}
         <Route path="/" component={Home}/>
-        <Route path="/run/:id/play" component={LeaderRunPlay}/>
         <Route path="/run/:id/debrief" component={LeaderRunDebrief}/>
       </Router>
     );

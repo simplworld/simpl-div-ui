@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import {Link} from 'react-router';
 
+import AdvancePhaseContainer from '../containers/AdvancePhaseContainer';
+
 class RunRow extends React.Component {
   constructor(props) {
     super(props);
@@ -17,17 +19,20 @@ class RunRow extends React.Component {
 
   render() {
     const phase = this.getPhase();
-    const linkDestination = (phase.name === 'Debrief')
-            ? `/run/${this.props.run.id}/debrief`
-            : `/run/${this.props.run.id}/play`;
+    const linkDestination = `/run/${this.props.run.id}/debrief`;
+
+    let name = this.props.run.name;
+    if ((phase.name === 'Debrief')) {
+      name = (
+        <Link to={linkDestination} id={`Link_${this.props.run.name}`}>{this.props.run.name}</Link>
+      );
+    }
 
     return (
       <tr>
+        <td>{name}</td>
         <td>
-          <Link to={linkDestination} id={`Link_${this.props.run.name}`}>{this.props.run.name}</Link>
-        </td>
-        <td>
-          <span>{phase.name}</span>
+          <AdvancePhaseContainer run={this.props.run}/>
         </td>
       </tr>
     );

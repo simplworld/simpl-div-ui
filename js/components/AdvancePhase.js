@@ -16,7 +16,7 @@ class AdvancePhase extends React.Component {
     )
 
     if (nextPhase === undefined) {
-      return (<span>Current phase is {currentPhase.name}.</span>);
+      return (<span>{currentPhase.name}</span>);
     } else {
       if (this.props.advancingPhase) {
         return (
