@@ -21,7 +21,7 @@
     "redux-form": "^8.3.6",
     "redux-recycle": "^1.2.0",
     "simpl-react": "^0.8.0",
-    "validator": "^6.1.0",
+    "validator": "^13.7.0",
     "webpack": "^3.11.0",
     "webpack-bundle-tracker": "^0.4.3",
     "webpack-stream": "^4.0.3"
